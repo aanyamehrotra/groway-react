@@ -1,162 +1,161 @@
 /* Landing.css */
 
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-  }
-  
-  .landing-container {
-    width: 100%;
-    overflow-x: hidden;
-  }
-  
-  /* Hero Section */
-  .hero {
-    text-align: center;
-    padding: 80px 20px;
-    background: linear-gradient(to right, #00b09b, #96c93d);
-    color: white;
-  }
-  
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-  }
-  
-  .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-  }
-  
-  .hero-btn {
-    padding: 12px 28px;
-    font-size: 1rem;
-    background-color: white;
-    color: #00b09b;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: 600;
-  }
-  
-  .hero-btn:hover {
-    background-color: #e0f7f4;
-  }
-  
-  /* Quote Section */
-  .quote {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 20px;
-    background-color: #fff;
-    text-align: center;
-  }
-  
-  .quote-img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    border-radius: 12px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  
-  .quote h2 {
-    font-size: 1.8rem;
-    color: #444;
-  }
-  
-  /* Categories */
-  .categories {
-    padding: 60px 20px;
-    background-color: #f4fdfb;
-    text-align: center;
-  }
-  
-  .categories h2 {
-    font-size: 2rem;
-    margin-bottom: 40px;
-  }
-  
-  .category-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-  }
-  
-  .category-card {
-    background: white;
-    padding: 30px 20px;
-    border-radius: 12px;
-    width: 250px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease;
-  }
-  
-  .category-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .category-card h3 {
-    color: #00b09b;
-    margin-bottom: 10px;
-  }
-  
-  /* Contact */
-  .contact {
-    padding: 60px 20px;
-    background-color: #fff;
-    text-align: center;
-  }
-  
-  .contact h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-  }
-  
-  .contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .contact-form input,
-  .contact-form textarea {
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    resize: vertical;
-  }
-  
-  .contact-form button {
-    background-color: #00b09b;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .contact-form button:hover {
-    background-color: #019183;
-  }
-  
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #e6fff8;
-    color: #444;
-    font-size: 0.9rem;
-  }
-  
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.landing-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(to right, #00b09b, #96c93d);
+  color: white;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.hero-btn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  background-color: white;
+  color: #00b09b;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.hero-btn:hover {
+  background-color: #e0f7f4;
+}
+
+/* Quote Section */
+.quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.quote-img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.quote h2 {
+  font-size: 1.8rem;
+  color: #444;
+}
+
+/* Categories */
+.categories {
+  padding: 60px 20px;
+  background-color: #f4fdfb;
+  text-align: center;
+}
+
+.categories h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.category-card {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 12px;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+}
+
+.category-card h3 {
+  color: #00b09b;
+  margin-bottom: 10px;
+}
+
+/* Contact */
+.contact {
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.contact-form button {
+  background-color: #00b09b;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: #019183;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #e6fff8;
+  color: #444;
+  font-size: 0.9rem;
+}

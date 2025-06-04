@@ -1,0 +1,57 @@
+.pricing-section {
+    padding: 4rem 2rem;
+    background-color: #fdfdfd;
+    text-align: center;
+  }
+  
+  .pricing-heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .pricing-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+  
+  .card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card .price {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+  }
+  
+  .card .details {
+    white-space: pre-line;
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 1rem;
+  }
+  
+  .card button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #00d084;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .card.hack button {
+    background-color: #ff5722;
+  }
+  
