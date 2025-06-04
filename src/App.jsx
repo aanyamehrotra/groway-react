@@ -10,15 +10,9 @@ function App() {
     <div className="app-container">
       <Navbar />
       <main>
-        <section id="home">
-          <ChangeYourself />
-        </section>
-        <section id="features">
-          <Landing />
-        </section>
-        <section id="pricing">
-          <Pricing />
-        </section>
+        <ChangeYourself />
+        <Landing />
+        <Pricing />
       </main>
     </div>
   );
