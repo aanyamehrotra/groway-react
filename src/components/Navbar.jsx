@@ -7,17 +7,20 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMenuOpen]);
 
   const handleNavClick = (id) => {
     setIsMenuOpen(false);
@@ -34,20 +37,23 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="logo">Groway</div>
+      <div className="logo" onClick={() => handleNavClick('home')}>
+        Groway
+      </div>
       <button 
-        className="mobile-menu-btn"
+        className={`mobile-menu-btn ${isMenuOpen ? 'active' : ''}`}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
+        aria-label="Toggle menu"
       >
         <div></div>
         <div></div>
         <div></div>
       </button>
       <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-        <li><a href="#" onClick={() => handleNavClick('home')}>Home</a></li>
-        <li><a href="#" onClick={() => handleNavClick('features')}>Test List</a></li>
-        <li><a href="#" onClick={() => handleNavClick('pricing')}>Plans & Pricing</a></li>
-        <li><a href="#" onClick={() => handleNavClick('contact')}>Contact</a></li>
+        <li><a href="#home" onClick={() => handleNavClick('home')}>Home</a></li>
+        <li><a href="#features" onClick={() => handleNavClick('features')}>Test List</a></li>
+        <li><a href="#pricing" onClick={() => handleNavClick('pricing')}>Plans & Pricing</a></li>
+        <li><a href="#contact" onClick={() => handleNavClick('contact')}>Contact</a></li>
       </ul>
     </nav>
   );
