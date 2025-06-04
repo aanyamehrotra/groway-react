@@ -1,44 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './landing.css';
 
 const Landing = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Form submitted:', formData);
+    // Reset form
+    setFormData({ name: '', email: '', message: '' });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   return (
     <div className="landing-container">
       <section className="hero">
-        <h1>Discover Yourself</h1>
-        <p>Take a personalized test and explore your strengths.</p>
-        <button className="hero-btn">Start Test</button>
+        <h1>Discover Your True Potential</h1>
+        <p>Take our personalized assessment and unlock insights about your strengths and abilities.</p>
+        <button className="hero-btn">Start Your Journey</button>
       </section>
 
       <section className="quote">
-        <img src="/assets/change-yourself.jpg" alt="Change Yourself" className="quote-img" />
-        <h2>If you want to change the world, start with yourself.</h2>
+        <img src="/assets/change-yourself.jpg" alt="Personal Growth" className="quote-img" />
+        <h2>"If you want to change the world, start with yourself."</h2>
       </section>
 
       <section className="categories" id="categories">
-        <h2>Choose Your Category</h2>
+        <h2>Explore Your Growth Areas</h2>
         <div className="category-grid">
           {['Aptitude', 'Personality', 'Skills'].map((cat) => (
             <div key={cat} className="category-card">
               <h3>{cat}</h3>
-              <p>Take a test to explore your {cat.toLowerCase()}.</p>
+              <p>Discover and develop your {cat.toLowerCase()} through our comprehensive assessment.</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="contact" id="contact">
-        <h2>Contact Us</h2>
-        <form className="contact-form">
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <textarea placeholder="Your Message" rows="4" required></textarea>
+        <h2>Get in Touch</h2>
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Your Name"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Your Email"
+            required
+          />
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            placeholder="Your Message"
+            rows="4"
+            required
+          ></textarea>
           <button type="submit">Send Message</button>
         </form>
       </section>
 
       <footer className="footer">
-        <p>&copy; 2025 Groway. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Groway. All rights reserved.</p>
       </footer>
     </div>
   );
