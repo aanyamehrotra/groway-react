@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ onLoginClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -54,6 +54,7 @@ const Navbar = () => {
         <li><a href="#features" onClick={() => handleNavClick('features')}>Test List</a></li>
         <li><a href="#pricing" onClick={() => handleNavClick('pricing')}>Plans & Pricing</a></li>
         <li><a href="#contact" onClick={() => handleNavClick('contact')}>Contact</a></li>
+        <li><button className="get-started-btn" onClick={onLoginClick}>Get Started</button></li>
       </ul>
     </nav>
   );
