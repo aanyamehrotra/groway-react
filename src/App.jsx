@@ -16,14 +16,21 @@ function App() {
     setShowLogin(false);
   };
 
+  const handleNavigation = (section) => {
+    if (section === 'home') {
+      setShowLogin(false);
+      setShowTest(false);
+    } else if (section === 'test') {
+      setShowTest(true);
+      setShowLogin(false);
+    }
+  };
+
   return (
     <div className="app-container">
       <Navbar 
         onLoginClick={() => setShowLogin(true)} 
-        onHomeClick={() => {
-          setShowLogin(false);
-          setShowTest(false);
-        }}
+        onNavigation={handleNavigation}
       />
       {showLogin ? (
         <LoginSignup onStartTest={handleStartTest} />

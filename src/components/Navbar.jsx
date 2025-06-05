@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 
-const Navbar = ({ onLoginClick, onHomeClick }) => {
+const Navbar = ({ onLoginClick, onNavigation }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -22,20 +22,9 @@ const Navbar = ({ onLoginClick, onHomeClick }) => {
     }
   }, [isMenuOpen]);
 
-  const handleNavClick = (id) => {
+  const handleNavClick = (section) => {
     setIsMenuOpen(false);
-    if (id === 'home') {
-      onHomeClick();
-    }
-    const element = document.getElementById(id);
-    if (element) {
-      const navbarHeight = document.querySelector('.navbar').offsetHeight;
-      const elementPosition = element.offsetTop - navbarHeight;
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
-    }
+    onNavigation(section);
   };
 
   return (
@@ -53,14 +42,14 @@ const Navbar = ({ onLoginClick, onHomeClick }) => {
         <div></div>
       </button>
       <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-        <li><a href="#home" onClick={() => handleNavClick('home')}>Home</a></li>
-        <li><a href="#features" onClick={() => handleNavClick('features')}>Test List</a></li>
+        <li><a href="#" onClick={() => handleNavClick('home')}>Home</a></li>
+        <li><a href="#" onClick={() => handleNavClick('test')}>Test List</a></li>
         <li><a href="#pricing" onClick={() => handleNavClick('pricing')}>Plans & Pricing</a></li>
         <li><a href="#contact" onClick={() => handleNavClick('contact')}>Contact</a></li>
         <li><button className="get-started-btn" onClick={onLoginClick}>Get Started</button></li>
       </ul>
     </nav>
   );
-}
+};
 
-export default Navbar
+export default Navbar;
