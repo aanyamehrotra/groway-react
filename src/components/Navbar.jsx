@@ -62,3 +62,5 @@ const Navbar = ({ onLoginClick, onHomeClick }) => {
     </nav>
   );
 }
+
+export default Navbar
