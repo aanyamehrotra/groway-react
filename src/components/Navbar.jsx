@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 
-const Navbar = ({ onLoginClick, onNavigation }) => {
+const Navbar = ({ onLoginClick, onNavigation, currentSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -25,6 +25,13 @@ const Navbar = ({ onLoginClick, onNavigation }) => {
   const handleNavClick = (section) => {
     setIsMenuOpen(false);
     onNavigation(section);
+    
+    if (section === 'pricing' || section === 'contact') {
+      const element = document.getElementById(`${section}-section`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
@@ -44,8 +51,8 @@ const Navbar = ({ onLoginClick, onNavigation }) => {
       <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
         <li><a href="#" onClick={() => handleNavClick('home')}>Home</a></li>
         <li><a href="#" onClick={() => handleNavClick('test')}>Test List</a></li>
-        <li><a href="#pricing" onClick={() => handleNavClick('pricing')}>Plans & Pricing</a></li>
-        <li><a href="#contact" onClick={() => handleNavClick('contact')}>Contact</a></li>
+        <li><a href="#" onClick={() => handleNavClick('pricing')}>Plans & Pricing</a></li>
+        <li><a href="#" onClick={() => handleNavClick('contact')}>Contact</a></li>
         <li><button className="get-started-btn" onClick={onLoginClick}>Get Started</button></li>
       </ul>
     </nav>

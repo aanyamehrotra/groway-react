@@ -100,11 +100,13 @@ const TestSection = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
+  const [showResults, setShowResults] = useState(false);
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
     setCurrentQuestion(0);
     setAnswers({});
+    setShowResults(false);
   };
 
   const handleAnswer = (answer) => {
@@ -117,6 +119,8 @@ const TestSection = () => {
   const handleNext = () => {
     if (currentQuestion < questions[selectedCategory].length - 1) {
       setCurrentQuestion(prev => prev + 1);
+    } else if (Object.keys(answers).length === questions[selectedCategory].length) {
+      setShowResults(true);
     }
   };
 
@@ -126,26 +130,110 @@ const TestSection = () => {
     }
   };
 
+  const calculateResults = () => {
+    const totalQuestions = questions[selectedCategory].length;
+    const answeredQuestions = Object.keys(answers).length;
+    
+    if (answeredQuestions < totalQuestions) {
+      return null;
+    }
+
+    const scoreMap = {
+      'Very Poorly': 1,
+      'Poorly': 2,
+      'Average': 3,
+      'Well': 4,
+      'Very Well': 5,
+      'Not Important': 1,
+      'Slightly Important': 2,
+      'Moderately Important': 3,
+      'Important': 4,
+      'Very Important': 5,
+      'Never': 1,
+      'Rarely': 2,
+      'Sometimes': 3,
+      'Often': 4,
+      'Very Often': 5,
+      'Strongly Dislike': 1,
+      'Dislike': 2,
+      'Neutral': 3,
+      'Like': 4,
+      'Strongly Like': 5,
+      'Not Confident': 1,
+      'Slightly Confident': 2,
+      'Moderately Confident': 3,
+      'Confident': 4,
+      'Very Confident': 5,
+      'Not Motivated': 1,
+      'Slightly Motivated': 2,
+      'Moderately Motivated': 3,
+      'Motivated': 4,
+      'Highly Motivated': 5,
+    };
+
+    const totalScore = Object.values(answers).reduce((sum, answer) => sum + scoreMap[answer], 0);
+    const maxScore = totalQuestions * 5;
+    const percentage = (totalScore / maxScore) * 100;
+
+    return {
+      score: totalScore,
+      maxScore,
+      percentage: Math.round(percentage),
+      recommendation: percentage >= 70 ? 'Highly Recommended' : percentage >= 50 ? 'Recommended with Development' : 'Consider Alternative Paths'
+    };
+  };
+
+  const renderResults = () => {
+    const results = calculateResults();
+    if (!results) return null;
+
+    return (
+      <div className="results-container">
+        <h3>Test Results</h3>
+        <div className="result-score">
+          <div className="score-circle">
+            <span className="percentage">{results.percentage}%</span>
+          </div>
+        </div>
+        <p className="result-text">Score: {results.score} out of {results.maxScore}</p>
+        <div className={`recommendation ${results.recommendation.toLowerCase().replace(/\s+/g, '-')}`}>
+          <h4>Career Recommendation:</h4>
+          <p>{results.recommendation}</p>
+        </div>
+        <button className="restart-btn" onClick={() => {
+          setSelectedCategory('');
+          setCurrentQuestion(0);
+          setAnswers({});
+          setShowResults(false);
+        }}>
+          Take Another Test
+        </button>
+      </div>
+    );
+  };
+
   return (
     <section className="test-section">
       <div className="test-container">
         <h2>Career Assessment Test</h2>
         
-        <div className="category-selector">
-          <label htmlFor="category">Select your desired career:</label>
-          <select
-            id="category"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-          >
-            <option value="">Choose a career</option>
-            {categories.map(category => (
-              <option key={category} value={category}>{category}</option>
-            ))}
-          </select>
-        </div>
-
-        {selectedCategory && (
+        {!selectedCategory ? (
+          <div className="category-selector">
+            <label htmlFor="category">Select your desired career:</label>
+            <select
+              id="category"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+            >
+              <option value="">Choose a career</option>
+              {categories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
+          </div>
+        ) : showResults ? (
+          renderResults()
+        ) : (
           <div className="question-container">
             <div className="progress-bar">
               <div 
@@ -182,10 +270,9 @@ const TestSection = () => {
               </button>
               <button 
                 onClick={handleNext}
-                disabled={currentQuestion === questions[selectedCategory].length - 1}
                 className="nav-btn"
               >
-                Next
+                {currentQuestion === questions[selectedCategory].length - 1 ? 'Show Results' : 'Next'}
               </button>
             </div>
           </div>
