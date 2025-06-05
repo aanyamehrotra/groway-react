@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 
-const Navbar = ({ onLoginClick }) => {
+const Navbar = ({ onLoginClick, onHomeClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -24,6 +24,9 @@ const Navbar = ({ onLoginClick }) => {
 
   const handleNavClick = (id) => {
     setIsMenuOpen(false);
+    if (id === 'home') {
+      onHomeClick();
+    }
     const element = document.getElementById(id);
     if (element) {
       const navbarHeight = document.querySelector('.navbar').offsetHeight;
@@ -58,6 +61,4 @@ const Navbar = ({ onLoginClick }) => {
       </ul>
     </nav>
   );
-};
-
-export default Navbar;
+}

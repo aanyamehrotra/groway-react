@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LoginSignup.css';
 
-const LoginSignup = () => {
+const LoginSignup = ({ onStartTest }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
@@ -12,7 +12,7 @@ const LoginSignup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Handle login/signup logic here
+    onStartTest(); // Navigate to test section after login/signup
   };
 
   const handleChange = (e) => {
