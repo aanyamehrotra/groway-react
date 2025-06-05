@@ -13,32 +13,85 @@ const categories = [
 
 const questions = {
   "Software Engineer": [
-    "How comfortable are you with learning new programming languages and frameworks?",
-    "How do you approach debugging complex technical issues?",
-    "How important is code quality and maintainability to you?",
-    "How do you handle tight deadlines and changing requirements?",
-    "How do you stay updated with the latest technology trends?",
-    "How do you collaborate with non-technical team members?",
-    "How do you approach system architecture decisions?",
-    "How do you handle technical debt in your projects?",
-    "How do you ensure the security of your applications?"
-  ],
-  // Add more categories with their questions here
+    {
+      question: "How comfortable are you with learning new programming languages?",
+      options: ["Very Uncomfortable", "Uncomfortable", "Neutral", "Comfortable", "Very Comfortable"]
+    },
+    {
+      question: "How do you handle debugging complex issues?",
+      options: ["Very Poorly", "Poorly", "Average", "Well", "Very Well"]
+    },
+    {
+      question: "How important is code quality to you?",
+      options: ["Not Important", "Slightly Important", "Moderately Important", "Important", "Very Important"]
+    },
+    {
+      question: "How do you handle tight deadlines?",
+      options: ["Very Poorly", "Poorly", "Average", "Well", "Very Well"]
+    },
+    {
+      question: "How often do you learn new technologies?",
+      options: ["Never", "Rarely", "Sometimes", "Often", "Very Often"]
+    },
+    {
+      question: "How well do you work in a team?",
+      options: ["Very Poorly", "Poorly", "Average", "Well", "Very Well"]
+    },
+    {
+      question: "How do you feel about code reviews?",
+      options: ["Strongly Dislike", "Dislike", "Neutral", "Like", "Strongly Like"]
+    },
+    {
+      question: "How do you handle project requirements changes?",
+      options: ["Very Poorly", "Poorly", "Average", "Well", "Very Well"]
+    },
+    {
+      question: "How important is documentation to you?",
+      options: ["Not Important", "Slightly Important", "Moderately Important", "Important", "Very Important"]
+    }
+  ]
 };
 
 // Generate dummy questions for all categories
 categories.forEach(category => {
   if (!questions[category]) {
     questions[category] = [
-      `How do you handle stress in ${category} role?`,
-      `What motivates you to work as a ${category}?`,
-      `How do you stay updated with ${category} industry trends?`,
-      `How do you handle difficult clients/stakeholders in ${category} field?`,
-      `What's your approach to problem-solving as a ${category}?`,
-      `How do you manage time and priorities in ${category} role?`,
-      `How do you collaborate with team members as a ${category}?`,
-      `What's your biggest achievement as a ${category}?`,
-      `Where do you see yourself in 5 years in ${category} field?`
+      {
+        question: `How do you handle stress in ${category} role?`,
+        options: ["Very Poorly", "Poorly", "Average", "Well", "Very Well"]
+      },
+      {
+        question: `What motivates you to work as a ${category}?`,
+        options: ["Not Motivated", "Slightly Motivated", "Moderately Motivated", "Motivated", "Highly Motivated"]
+      },
+      {
+        question: `How do you stay updated with ${category} industry trends?`,
+        options: ["Never", "Rarely", "Sometimes", "Often", "Very Often"]
+      },
+      {
+        question: `How do you handle difficult clients in ${category} field?`,
+        options: ["Very Poorly", "Poorly", "Average", "Well", "Very Well"]
+      },
+      {
+        question: `What's your approach to problem-solving as a ${category}?`,
+        options: ["Very Poor", "Poor", "Average", "Good", "Excellent"]
+      },
+      {
+        question: `How do you manage time in ${category} role?`,
+        options: ["Very Poorly", "Poorly", "Average", "Well", "Very Well"]
+      },
+      {
+        question: `How well do you collaborate with team members?`,
+        options: ["Very Poorly", "Poorly", "Average", "Well", "Very Well"]
+      },
+      {
+        question: `How confident are you in your ${category} skills?`,
+        options: ["Not Confident", "Slightly Confident", "Moderately Confident", "Confident", "Very Confident"]
+      },
+      {
+        question: `How do you handle feedback in your work?`,
+        options: ["Very Poorly", "Poorly", "Average", "Well", "Very Well"]
+      }
     ];
   }
 });
@@ -59,8 +112,17 @@ const TestSection = () => {
       ...prev,
       [currentQuestion]: answer
     }));
+  };
+
+  const handleNext = () => {
     if (currentQuestion < questions[selectedCategory].length - 1) {
       setCurrentQuestion(prev => prev + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(prev => prev - 1);
     }
   };
 
@@ -93,18 +155,38 @@ const TestSection = () => {
             </div>
             
             <h3>Question {currentQuestion + 1} of {questions[selectedCategory].length}</h3>
-            <p className="question">{questions[selectedCategory][currentQuestion]}</p>
+            <p className="question">{questions[selectedCategory][currentQuestion].question}</p>
             
-            <div className="answers">
-              {['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'].map((answer, index) => (
-                <button
-                  key={index}
-                  className={`answer-btn ${answers[currentQuestion] === answer ? 'selected' : ''}`}
-                  onClick={() => handleAnswer(answer)}
-                >
-                  {answer}
-                </button>
+            <div className="radio-group">
+              {questions[selectedCategory][currentQuestion].options.map((option, index) => (
+                <label key={index} className="radio-label">
+                  <input
+                    type="radio"
+                    name="answer"
+                    value={option}
+                    checked={answers[currentQuestion] === option}
+                    onChange={() => handleAnswer(option)}
+                  />
+                  <span>{option}</span>
+                </label>
               ))}
+            </div>
+
+            <div className="navigation-buttons">
+              <button 
+                onClick={handlePrevious}
+                disabled={currentQuestion === 0}
+                className="nav-btn"
+              >
+                Previous
+              </button>
+              <button 
+                onClick={handleNext}
+                disabled={currentQuestion === questions[selectedCategory].length - 1}
+                className="nav-btn"
+              >
+                Next
+              </button>
             </div>
           </div>
         )}
