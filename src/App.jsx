@@ -10,13 +10,16 @@ import './App.css';
 function App() {
   const [showLogin, setShowLogin] = React.useState(false);
   const [showTest, setShowTest] = React.useState(false);
+  const [currentSection, setCurrentSection] = React.useState('home');
 
   const handleStartTest = () => {
     setShowTest(true);
     setShowLogin(false);
+    setCurrentSection('test');
   };
 
   const handleNavigation = (section) => {
+    setCurrentSection(section);
     if (section === 'home') {
       setShowLogin(false);
       setShowTest(false);
@@ -26,23 +29,36 @@ function App() {
     }
   };
 
+  const renderMainContent = () => {
+    if (showLogin) {
+      return <LoginSignup onStartTest={handleStartTest} />;
+    }
+    
+    if (showTest) {
+      return <TestSection />;
+    }
+
+    return (
+      <main>
+        <ChangeYourself />
+        <Landing />
+        {currentSection === 'pricing' && <div id="pricing-section"><Pricing /></div>}
+        {currentSection === 'contact' && <div id="contact-section"><Landing /></div>}
+      </main>
+    );
+  };
+
   return (
     <div className="app-container">
       <Navbar 
-        onLoginClick={() => setShowLogin(true)} 
+        onLoginClick={() => {
+          setShowLogin(true);
+          setShowTest(false);
+        }} 
         onNavigation={handleNavigation}
+        currentSection={currentSection}
       />
-      {showLogin ? (
-        <LoginSignup onStartTest={handleStartTest} />
-      ) : showTest ? (
-        <TestSection />
-      ) : (
-        <main>
-          <ChangeYourself />
-          <Landing />
-          <Pricing />
-        </main>
-      )}
+      {renderMainContent()}
     </div>
   );
 }
